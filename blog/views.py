@@ -7,13 +7,19 @@ import logging
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
 
+def get_ip(request):
+  from django.http import HttpResponse
+  return HttpResponse(request.META['REMOTE_ADDR'])
+
 logger = logging.getLogger(__name__)
 
 @cache_page(300)
 @vary_on_cookie
 def index(request):
     # posts = Post.objects.filter(published_at__lte=timezone.now())
-    posts = Post.objects.all()
+    # posts = Post.objects.all()
+    # posts = Post.objects.filter(published_at__lte=timezone.now()).select_related("author").defer("created_at", "modified_at")
+    posts = Post.objects.all().select_related("author").defer("created_at", "modified_at")
     logger.debug("Got %d posts", len(posts))
     return render(request, "blog/index.html", {"posts": posts})
 
