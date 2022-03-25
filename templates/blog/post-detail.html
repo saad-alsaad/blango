@@ -3,6 +3,15 @@
 {% block content %}
 {% load blog_extras cache %}
 
+{% if post.author.profile %}
+    {% row %}
+        {% col %}
+            <h4>About the author</h4>
+            <p>{{ post.author.profile.bio }}</p>
+        {% endcol %}
+    {% endrow %}
+{% endif %}
+
 {% include "blog/post-comments.html" %}
 
 <!-- existing code here -->
