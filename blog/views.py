@@ -6,6 +6,8 @@ from blog.forms import CommentForm
 import logging
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
+from django.urls import reverse
+
 
 def get_ip(request):
   from django.http import HttpResponse
@@ -25,7 +27,7 @@ def index(request):
 
 
 def post_table(request):
-    return render(request, "blog/post-table.html")
+    return render(request, "blog/post-table.html", {"post_list_url": reverse("post-list")})
 
 
 def post_detail(request, slug):
