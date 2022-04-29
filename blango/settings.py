@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'drf_yasg',
     'django_filters',
+    'versatileimagefield',
 ]
 
 SITE_ID = 1
@@ -113,7 +114,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'blango.wsgi.application'
-
+MEDIA_ROOT = BASE_DIR / "media"  # should be in the Dev class
+MEDIA_URL = "/media/" # should be in the Dev class
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
